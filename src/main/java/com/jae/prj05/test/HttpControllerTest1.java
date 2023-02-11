@@ -4,9 +4,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 // 사용자 요청 -> 응답(HTML 파일)
 // @Controller
+
 
 // 사용자 요청 -> 응답(Data로)
 // @RestController
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HttpControllerTest1 {
 	
 //	인터넷 브라우저 요청은 무조건 get 요청
-//(select)	http://localhost:8077/http/get
+//(select) 	http://localhost:8077/http/get
 	@GetMapping("/http/get")
 	public String getTest() {
 		return "get 요청";
@@ -31,8 +33,8 @@ public class HttpControllerTest1 {
 	
 //(update)	http://localhost:8077/http/put
 	@PutMapping("/http/put")
-	public String putTest() {
-		return "put 요청";
+	public String putTest(@RequestBody String  m) {
+		return "put 요청" + m;
 	}
 	
 //(delete)	http://localhost:8077/http/delete
