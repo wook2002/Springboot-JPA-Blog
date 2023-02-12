@@ -22,10 +22,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	
+	// .jar´Â ÀÌÁ¦ jsp ¾ÈµÊ
 	//implementation 'javax.servlet:jstl'
 	//implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-	
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
