@@ -1,20 +1,59 @@
 #server.port=8077
 server:
   port: 8077
-  
-
-#mysql-session-config
-#spring.datasource.data-username=ejwook
-#spring.datasource.data-password=ejwook
+  servlet:
+    context-path: /blog  #/-> /blog
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
-    username: ejwook
+    username: cos
     password: ejwook
     
- #jsp
-# spring.mvc.view.prefix: /WEB-INF/views/
-# spring.mvc.view.suffix: .jsp
-#JSP수정시 바로 적용
-# server.servlet.jsp.init-parameters.development=true
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create #(update,none,...) 기존거 있으면 덮어씌움(update: 기존꺼 변경할거임)
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false  #jpa가 사용하는 넘버링전략 사용안함 => (@GeneratedValue(~.IDENTITY) ->연결된DB따라갈거임)
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+# 자동리로드 (livereload : 정적 , Automatic : claapath)
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+      
+#      jpa:
+#  open-in-view: true
+#  hibernate:
+#    ddl-auto: create (기존 있으면 덮어씌움)
+#    naming: // (@Entity = 테이블 만들때 , 변수명 그대로 DB에 넣을거)
+#      physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    //physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+#    use-new-id-generator-mappings: false (JPA의 기존전략 안따라갈거)
+#  show-sql: true (있어야 콘솔창에서 보임(한줄로나옴))
+#  properties:
+#    hibernate.format_sql: true (예쁘게 정렬되서 나옴)
+#
+#// physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+#=> 카멜표기법이라면 바꿔줌(myEmail -> my_email)
+      

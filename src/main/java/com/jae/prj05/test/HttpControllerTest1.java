@@ -22,7 +22,7 @@ public class HttpControllerTest1 {
 	private static final String TAG = "HttpControllerTest1 : ";
 	
 //	인터넷 브라우저 요청은 무조건 get 요청
-//(select) 	http://localhost:8077/http/get
+//(select) 	http://localhost:8077/blog/http/get
 	@GetMapping("/http/get")
 	public String getTest(
 //			get 값보내는거 => (only) 쿼리스트링
@@ -54,7 +54,7 @@ public class HttpControllerTest1 {
 //		(200) response : Content-Type: text/html;charset=UTF-8 
 	}
 	
-//(insert)	http://localhost:8077/http/post
+//(insert)	http://localhost:8077/blog/http/post
 	@PostMapping("/http/post")
 	public String postTest(
 //			1) 쿼리스트링 or
@@ -77,13 +77,13 @@ public class HttpControllerTest1 {
 //		(405) Method Not Allowed
 	}
 	
-//(update)	http://localhost:8077/http/put 
+//(update)	http://localhost:8077/blog/http/put 
 	@PutMapping("/http/put")
 	public String putTest(@RequestBody Member  m) {
 		return "put 요청" + m ;
 	}
 	
-//(delete)	http://localhost:8077/http/delete
+//(delete)	http://localhost:8077/blog/http/delete
 	@DeleteMapping("/http/delete")
 	public String deleteTest() {
 		return "delete 요청";

@@ -1,6 +1,5 @@
 package com.jae.prj05.test;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
