@@ -42,9 +42,10 @@ public class Board {
 	@ColumnDefault("0") //숫자 vs @ColumnDefault("'user'") 문자
 	private int count; // 조회수
 	
-// @ManyToOne => EAGER라는 기본전략 : Board를 select하면, 무조건 들고와
-//	@OneToMany = > LAZY라는 기본전략 : Board를 select하면, 필요할 때만 들고오기
-//	@ManyToOne(fetch = FetchType.EAGER) // Many(Board) - One(User) => (n 대 1)
+//	@ManyToOne(fetch = FetchType.EAGER) // 기본
+// @ManyToOne => EAGER라는 기본전략 (Board를 select하면, 무조건 들고와)
+//	@OneToMany = > LAZY라는 기본전략 (Board를 select하면, 필요할 때만 들고오기)
+	
 	@ManyToOne
 	@JoinColumn(name="userId") // userId -> Board의 DB컬럼명(FK)
 	private User user; // (orm은)객체를 사용하면 자동 FK 만들어짐 
@@ -52,8 +53,9 @@ public class Board {
 //	private int userId; // foreignKey => ormㄴㄴ 오브젝트로 해야됨)
 //	FK : java는 객체, DB는 int 
 	
-	// mappedBy : reply는 연관관계주인이 아니다(난 FK가 아니다) 
-	//						=> DB에 컬럼을 만들지마(Board쪽이 FK임)
+// mappedBy : reply는 연관관계주인이 아니다(난 FK가 아니다) 
+//						=> DB에 컬럼을 만들지마(Board쪽이 FK임)
+	
 //	@JoinColumn(name="replyId") // FK 필요없음(원자성깨짐)
 //	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY) // (게시글1:답변n)
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // 필수로 가져올꺼라서 전략 바꿈
