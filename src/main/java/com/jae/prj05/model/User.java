@@ -33,7 +33,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // (비워도 자동입력)넘버링전략(DB넘버링 전략을 따라감(프로젝트에 연결된)( 오라클(시퀀스), mysql(auto_increment) )
 	private int id; // 
 	
-	@Column(nullable = false, length = 30) //( null불가, 30자가 최대 )  
+	@Column(nullable = false, length = 30, unique = true) //( null불가, 30자가 최대 )  
 	private String username; // 아이디
 	
 	@Column(nullable = false, length = 100) // 해시로 변경할거라서 넉넉하게(암호화)
