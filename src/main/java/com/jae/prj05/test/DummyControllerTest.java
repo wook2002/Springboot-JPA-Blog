@@ -21,15 +21,15 @@ import com.jae.prj05.model.RoleType;
 import com.jae.prj05.model.User;
 import com.jae.prj05.repository.UserRepository;
 
-// RestController : data¸®ÅÏ
-// Controller : html¸®ÅÏ
+// RestController : dataë¦¬í„´
+// Controller : htmlë¦¬í„´
 @RestController
 public class DummyControllerTest {
 	
 
-//	ÄÄÆ÷³ÍÆ® ½ºÄµÇÒ ¶§, UserRepository°¡ ¸Ş¸ğ¸®¿¡ µé¾î°¡ÀÖ´ÂÁß => »ç¿ëÇÏ±â¸¸ÇÏ¸é µÊ
-//	DummyControllerTest°¡ ¸Ş¸ğ¸®¿¡ µé¾î°¥ ¶§, DI 
-	@Autowired // ÀÇÁ¸¼ºÁÖÀÔ(DI)
+//	ì»´í¬ë„ŒíŠ¸ ìŠ¤ìº”í•  ë•Œ, UserRepositoryê°€ ë©”ëª¨ë¦¬ì— ë“¤ì–´ê°€ìˆëŠ”ì¤‘ => ì‚¬ìš©í•˜ê¸°ë§Œí•˜ë©´ ë¨
+//	DummyControllerTestê°€ ë©”ëª¨ë¦¬ì— ë“¤ì–´ê°ˆ ë•Œ, DI 
+	@Autowired // ì˜ì¡´ì„±ì£¼ì…(DI)
 	private UserRepository userRepository;
 	
 	@GetMapping("/dummy/users")
@@ -41,23 +41,23 @@ public class DummyControllerTest {
 	@DeleteMapping("/dummy/user/{id}")
 	public String delete(@PathVariable int id) {
 		
-		// null°ª ¿À¸é ¿À·ù( deleteById-> void)
+		// nullê°’ ì˜¤ë©´ ì˜¤ë¥˜( deleteById-> void)
 //		userRepository.deleteById(id); 
 		
 		try {
 			userRepository.deleteById(id);
 		}catch(IllegalArgumentException e) {
 //		}catch(EmptyResultDataAccessException e) {
-//		}catch(Exception e) { // ¿ä°Ç ±ÍÂúÀ¸¸é(but ´Ù¸¥ ExceptionÀÏ ¼öµµ ÀÖÀ¸´Ï) 
-			return "»èÁ¦ ½ÇÆĞ ÇØ´ç id ¾øÀ½";
+//		}catch(Exception e) { // ìš”ê±´ ê·€ì°®ìœ¼ë©´(but ë‹¤ë¥¸ Exceptionì¼ ìˆ˜ë„ ìˆìœ¼ë‹ˆ) 
+			return "ì‚­ì œ ì‹¤íŒ¨ í•´ë‹¹ id ì—†ìŒ";
 		}
-		return "»èÁ¦¿Ï·á id : " + id;
+		return "ì‚­ì œì™„ë£Œ id : " + id;
 	}
 	
 //	 ------- Pageable -------
 	// http://localhost:8077/blog/dummy/user?page=0
 	//data.domain Pageable 
-	// ÇÑÆäÀÌÁö´ç 2°Ç (½ºÇÁ¸µºÎÆ®+JPA -> ÆäÀÌÂ¡)
+	// í•œí˜ì´ì§€ë‹¹ 2ê±´ (ìŠ¤í”„ë§ë¶€íŠ¸+JPA -> í˜ì´ì§•)
 	@GetMapping("/dummy/user")
 	public List<User> pageList(  		//public interface Page<T> extends Slice<T> {
 			@PageableDefault(size=2, sort="id", direction = Sort.Direction.DESC)
@@ -65,8 +65,8 @@ public class DummyControllerTest {
 		
 		//(m1)
 //		  Page<User> users = 	userRepository.findAll(pageable); // Page<T> findAll(Pageable pageable);
-		 // content[], pageable{}, last µîµî ´Ù ³ª¿È 
-		 // => return Page<User> // List·Î ´øÁö´Â°Ô ÁÁÀ»µí
+		 // content[], pageable{}, last ë“±ë“± ë‹¤ ë‚˜ì˜´ 
+		 // => return Page<User> // Listë¡œ ë˜ì§€ëŠ”ê²Œ ì¢‹ì„ë“¯
 		 
 		//(m2)
 //	     List<User> users = 	userRepository.findAll(pageable).getContent();
@@ -79,50 +79,50 @@ public class DummyControllerTest {
 		Page<User> pagingUser = 	userRepository.findAll(pageable);
 //		if(pagingUser.isFirst())
 //		if(pagingUser.isLast())
-		// µîµî 'ºĞ±â'Ã³¸®°¡´É
+		// ë“±ë“± 'ë¶„ê¸°'ì²˜ë¦¬ê°€ëŠ¥
 	    List<User> users = pagingUser.getContent();
 	    
 		return users;
 	}
 	
 	
-// ------- Update (Put)------- (PutÀÌ¶ó GetÀÌ¶û url °ãÃÄµµ ±¸ºĞ°¡´É)
+// ------- Update (Put)------- (Putì´ë¼ Getì´ë‘ url ê²¹ì³ë„ êµ¬ë¶„ê°€ëŠ¥)
 	@Transactional // //(m2) javax.transaction
 	@PutMapping("/dummy/user/{id}")
 	public User updateUser(
 				@PathVariable int id
 				
 //				, User requestUser  
-				// ÀÌ°Ç -> formÅÂ±×¸¸ ¹ŞÀ» ¼ö ÀÖÀ½
+				// ì´ê±´ -> formíƒœê·¸ë§Œ ë°›ì„ ìˆ˜ ìˆìŒ
 				
 				,@RequestBody User requestUser 
-				// json ¹Ş±â
-				// springBootÀÇ MessageConvertÀÇ Jackson¶óÀÌºê·¯¸®°¡
-				// º¯È¯ÇØÁÜ (json -> java°´Ã¼) -> ÀÌ°Ô ¹Ù·Î @RequestBodyÀÌ¶ó´Â ¾î³ëÅ×ÀÌ¼Ç
+				// json ë°›ê¸°
+				// springBootì˜ MessageConvertì˜ Jacksonë¼ì´ë¸ŒëŸ¬ë¦¬ê°€
+				// ë³€í™˜í•´ì¤Œ (json -> javaê°ì²´) -> ì´ê²Œ ë°”ë¡œ @RequestBodyì´ë¼ëŠ” ì–´ë…¸í…Œì´ì…˜
 			) {
 		
 //		System.out.println("id : " + id);
 //		System.out.println("requestUser : " + requestUser);
-		// requestUser : User(id=0, username=null, password=¼öÁ¤, email=updat1@µû¶ó.ÄÄ, role=null, createDate=null)
+		// requestUser : User(id=0, username=null, password=ìˆ˜ì •, email=updat1@ë”°ë¼.ì»´, role=null, createDate=null)
 //		System.out.println("password : " + requestUser.getPassword());
 //		System.out.println("email : " + requestUser.getEmail());
 		
 	//requestUser.setId(id);
 	//userRepository.save(requestUser);
 		// ---> update(m1-1)
-		//.save() Á»´õ ÀÚ¼¼È÷
-		// ±×³É µ¤¾î¹ö¸²(data°°Àº°Å null µÇ°Å³ª, notNoll ÀÖÀ¸¸é ¿À·ù³ª°í...))
+		//.save() ì¢€ë” ìì„¸íˆ
+		// ê·¸ëƒ¥ ë®ì–´ë²„ë¦¼(dataê°™ì€ê±° null ë˜ê±°ë‚˜, notNoll ìˆìœ¼ë©´ ì˜¤ë¥˜ë‚˜ê³ ...))
 		// (
-		//      id Àü´Ş(x) => insert
-		// 	 id Àü´Ş(o) + ÇØ´çµ¥ÀÌÅÍ(x) => insert
-		// 	 id Àü´Ş(o) + ÇØ´çµ¥ÀÌÅÍ(o) => update
+		//      id ì „ë‹¬(x) => insert
+		// 	 id ì „ë‹¬(o) + í•´ë‹¹ë°ì´í„°(x) => insert
+		// 	 id ì „ë‹¬(o) + í•´ë‹¹ë°ì´í„°(o) => update
 		//)
 		
-		// update((m1) µ¥ÀÌÅÍ°¡Á®¿Í¼­ µ¤¾î¾º¿ò)
-		// !!! Java´Â ÆÄ¶ó¹ÌÅÍ(Arg)¿¡ ÇÔ¼ö°¡ ¸øµé¾î°¨ ! => ¶÷´Ù·Î °¡´É(java8¿¡¼­ »ı°Ü¼­)
-		// (Parameter(º¯¼ö¸í) vs Argment(°ª)) => ±×·¡¼­ IllegalArgumentException
+		// update((m1) ë°ì´í„°ê°€ì ¸ì™€ì„œ ë®ì–´ì”Œì›€)
+		// !!! JavaëŠ” íŒŒë¼ë¯¸í„°(Arg)ì— í•¨ìˆ˜ê°€ ëª»ë“¤ì–´ê° ! => ëŒë‹¤ë¡œ ê°€ëŠ¥(java8ì—ì„œ ìƒê²¨ì„œ)
+		// (Parameter(ë³€ìˆ˜ëª…) vs Argment(ê°’)) => ê·¸ë˜ì„œ IllegalArgumentException
 		User user = userRepository.findById(id).orElseThrow(()->{
-			return new IllegalArgumentException("¼öÁ¤¿¡ ½ÇÆĞ");
+			return new IllegalArgumentException("ìˆ˜ì •ì— ì‹¤íŒ¨");
 		});
 		user.setPassword(requestUser.getPassword());
 		user.setEmail(requestUser.getEmail());
@@ -131,81 +131,81 @@ public class DummyControllerTest {
 //		userRepository.save(user);
 		
 		//(m2) @Transactional
-		// ´õÆ¼ Ã¼Å·(Dirty Checking)
+		// ë”í‹° ì²´í‚¹(Dirty Checking)
 		
-		// (JPA)¿µ¼Ó¼º ÄÁÅØ½ºÆ®(Persistence Context), flush
+		// (JPA)ì˜ì†ì„± ì»¨í…ìŠ¤íŠ¸(Persistence Context), flush
 		
 		return user;
 	}
 	
-// ------- Detail (Get)-------  (PutÀÌ¶ó GetÀÌ¶û url °ãÃÄµµ ±¸ºĞ°¡´É)
-// -------	{id} urlÁÖ¼Ò => ÆÄ¶ó¹ÌÅÍ -------
-//	userRepository.getById(id); // jpa => ÄÃ·³¿¡ ½ÃÄö½º ºÎºĞ
+// ------- Detail (Get)-------  (Putì´ë¼ Getì´ë‘ url ê²¹ì³ë„ êµ¬ë¶„ê°€ëŠ¥)
+// -------	{id} urlì£¼ì†Œ => íŒŒë¼ë¯¸í„° -------
+//	userRepository.getById(id); // jpa => ì»¬ëŸ¼ì— ì‹œí€€ìŠ¤ ë¶€ë¶„
 	// http://localhost:8077/blog/dummy/user/1
 	@GetMapping("/dummy/user/{id}")
 	public User detail(@PathVariable int id) {
 		
-		// url¸¦ º¯¼ö·Î ¹ŞÀ½(IdºÎºĞÀ¸·Î) => ÇØ´çÇÏ´Â ÄÃ·³À» °¡Á®¿Í¾ßµÊ
+		// urlë¥¼ ë³€ìˆ˜ë¡œ ë°›ìŒ(Idë¶€ë¶„ìœ¼ë¡œ) => í•´ë‹¹í•˜ëŠ” ì»¬ëŸ¼ì„ ê°€ì ¸ì™€ì•¼ë¨
 //		User user = userRepository.findById(id)
 		
-		// (m1) À§Çè (Àı ¶§ null ¾øÀ»°Å´Ï °Á Optional »©·Å 
+		// (m1) ìœ„í—˜ (ì ˆ ë•Œ null ì—†ì„ê±°ë‹ˆ ê± Optional ë¹¼ë ´ 
 //		User user = userRepository.findById(id).get();
 		
-		// (m2) nullÀÌ¸é ³Ê°¡ ³ÖÀ¸·Å
+		// (m2) nullì´ë©´ ë„ˆê°€ ë„£ìœ¼ë ´
 		// Optional.orElseGet(Supplier<? extends User> supplier)
 //		User user = userRepository.findById(id).orElseGet(supplier)
 //		User user = userRepository.findById(id).orElseGet(new Supplier<User>() {
-				// µé¾î°¡º¸¸é ÀÎÅÍÆäÀÌ½º interface´Â new¸øÇÔ -> ÀÍ¸íÅ¬·¡½º ÇÊ¿äÇÔ
-				// DB¿¡ °ªÀÌ ¾øÀ¸¸é ÀÌ°Ô ½ÇÇàµÊ
+				// ë“¤ì–´ê°€ë³´ë©´ ì¸í„°í˜ì´ìŠ¤ interfaceëŠ” newëª»í•¨ -> ìµëª…í´ë˜ìŠ¤ í•„ìš”í•¨
+				// DBì— ê°’ì´ ì—†ìœ¼ë©´ ì´ê²Œ ì‹¤í–‰ë¨
 				
-				// SupplierÅ¸ÀÔ?
-				// ÀÍ¸í°´Ã¼ - Supplier´Â ÀÎÅÍÆäÀÌ½º¿©¼­(ÀÎÅÍÆäÀÌ½º´Â new ·Î °´Ã¼ ºÒ°¡)
+				// Supplieríƒ€ì…?
+				// ìµëª…ê°ì²´ - SupplierëŠ” ì¸í„°í˜ì´ìŠ¤ì—¬ì„œ(ì¸í„°í˜ì´ìŠ¤ëŠ” new ë¡œ ê°ì²´ ë¶ˆê°€)
 //			@Override
 //			public User get() {
-//				return new User();  //ºó°´Ã¼¸¦ return(ºó°´Ã¼¸¦ user¿¡ ³Ö¾îÁÜ)
+//				return new User();  //ë¹ˆê°ì²´ë¥¼ return(ë¹ˆê°ì²´ë¥¼ userì— ë„£ì–´ì¤Œ)
 //			}
 //		});
 		
-		// (m3) °¡Àå ¸¹ÀÌ ¾¸ (Àß¸øµÈ ÀÎ¼ö°¡ µé¾î¿À¸é throws)
+		// (m3) ê°€ì¥ ë§ì´ ì”€ (ì˜ëª»ëœ ì¸ìˆ˜ê°€ ë“¤ì–´ì˜¤ë©´ throws)
 		// CrudRepository
 		// @throws IllegalArgumentException if {@literal id} is {@literal null}.
-		// Supplier´Â ÀÎÅÍÆäÀÌ½º => new(x) => new ÀÍ¸íÅ¬·¡½º 
+		// SupplierëŠ” ì¸í„°í˜ì´ìŠ¤ => new(x) => new ìµëª…í´ë˜ìŠ¤ 
 		User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
 			@Override
 			public IllegalArgumentException get() {
-				return new IllegalArgumentException("ÇØ´ç À¯Àú´Â ¾ø½À´Ï´Ù. id : " + id);
+				return new IllegalArgumentException("í•´ë‹¹ ìœ ì €ëŠ” ì—†ìŠµë‹ˆë‹¤. id : " + id);
 			}
 		});
 
-		// ¶÷´Ù½Ä 
+		// ëŒë‹¤ì‹ 
 //		User user = userRepository.findById(id).orElseThrow(()->{
-//			return new IllegalArgumentException("ÇØ´ç»ç¿ëÀÚ´Â ¾ø´Ù. id : " + id);  // ; ¾øÀ¸¸é ¿¡·¯ 
+//			return new IllegalArgumentException("í•´ë‹¹ì‚¬ìš©ìëŠ” ì—†ë‹¤. id : " + id);  // ; ì—†ìœ¼ë©´ ì—ëŸ¬ 
 //		});
 		
 		// Optional<T> findById(ID id);
-		// id´Â ½ÃÄö½º·Î Çß´ø idÀÓ. 
-		// null·Î ¿Ã ¼öµµ ÀÖÀ¸´Ï Optional·Î User°´Ã¼ °¨½Î¼­ °¡Á®¿Ã°ÅÀÓ
-		// => Á÷Á¢ nullÀÎÁö ¾Æ´ÑÁö ÆÇ´ÜÇØ¾ßµÊ.
+		// idëŠ” ì‹œí€€ìŠ¤ë¡œ í–ˆë˜ idì„. 
+		// nullë¡œ ì˜¬ ìˆ˜ë„ ìˆìœ¼ë‹ˆ Optionalë¡œ Userê°ì²´ ê°ì‹¸ì„œ ê°€ì ¸ì˜¬ê±°ì„
+		// => ì§ì ‘ nullì¸ì§€ ì•„ë‹Œì§€ íŒë‹¨í•´ì•¼ë¨.
 		
 		System.out.println(user);
 		
-		//RestController -> Data ¸®ÅÏ
-		// user °´Ã¼ = ÀÚ¹Ù ¿ÀºêÁ§Æ®
-		// ¿äÃ» : À¥ºê¶ó¿ìÀú
+		//RestController -> Data ë¦¬í„´
+		// user ê°ì²´ = ìë°” ì˜¤ë¸Œì íŠ¸
+		// ìš”ì²­ : ì›¹ë¸Œë¼ìš°ì €
 		
-		// => (ÀÚ¹Ù°´Ã¼ -> data º¯È¯ÇØ¾ßµÇ´Âµ¥...) ¾Æ¹«Æ° ±×·¡¼­
+		// => (ìë°”ê°ì²´ -> data ë³€í™˜í•´ì•¼ë˜ëŠ”ë°...) ì•„ë¬´íŠ¼ ê·¸ë˜ì„œ
 		
-		// À¥ºê¶ó¿ìÀú´Â user°´Ã¼¸¦ ÀÌÇØ¸¦ ¸øÇÔ 
-		//		=> user°´Ã¼¸¦ º¯È¯½ÃÄÑ¾ßµÊ(json : À¥ºê¶ó¿ìÀú°¡ ÀÌÇØÇÒ ¼ö ÀÖ´Â µ¥ÀÌÅÍ)
-		//		(Gson¶óÀÌºê·¯¸® (java°´Ã¼ -> jsonÇÏ°í ´øÁ®ÁÜ))
-		//		=> ½ºÇÁ¸µºÎÆ® = MessageConverter¶ó´Â ¾Ö°¡ ÀÀ´ä½Ã ÀÚµ¿À¸·Î
-		//		=> ¸¸¾à ÀÚ¹Ù°´Ã¼¸¦ ¸®ÅÏÇÏ¸é, MessageConver°¡ Jackson ¶óÀÌºê·¯¸®¸¦ È£ÃâÇØ¼­
-		//		=> user°´Ã¼¸¦ jsonÀ¸·Î º¯È¯½ÃÄÑ ºê¶ó¿ìÀú¿¡°Ô ³Ñ°ÜÁÜ.
+		// ì›¹ë¸Œë¼ìš°ì €ëŠ” userê°ì²´ë¥¼ ì´í•´ë¥¼ ëª»í•¨ 
+		//		=> userê°ì²´ë¥¼ ë³€í™˜ì‹œì¼œì•¼ë¨(json : ì›¹ë¸Œë¼ìš°ì €ê°€ ì´í•´í•  ìˆ˜ ìˆëŠ” ë°ì´í„°)
+		//		(Gsonë¼ì´ë¸ŒëŸ¬ë¦¬ (javaê°ì²´ -> jsoní•˜ê³  ë˜ì ¸ì¤Œ))
+		//		=> ìŠ¤í”„ë§ë¶€íŠ¸ = MessageConverterë¼ëŠ” ì• ê°€ ì‘ë‹µì‹œ ìë™ìœ¼ë¡œ
+		//		=> ë§Œì•½ ìë°”ê°ì²´ë¥¼ ë¦¬í„´í•˜ë©´, MessageConverê°€ Jackson ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ í˜¸ì¶œí•´ì„œ
+		//		=> userê°ì²´ë¥¼ jsonìœ¼ë¡œ ë³€í™˜ì‹œì¼œ ë¸Œë¼ìš°ì €ì—ê²Œ ë„˜ê²¨ì¤Œ.
 		return user;
 	}
 	
 	// http://localhost:8077/blog/dummy/join
-	// httpÀÇ body¿¡ usernmae, password, email µ¥ÀÌÅÍ¸¦ °¡Áö°í ¿äÃ»
+	// httpì˜ bodyì— usernmae, password, email ë°ì´í„°ë¥¼ ê°€ì§€ê³  ìš”ì²­
 	@PostMapping("/dummy/join")
 	public String join(
 //				@RequestParam("username")
@@ -224,6 +224,6 @@ public class DummyControllerTest {
 		user.setRole(RoleType.USER);
 		userRepository.save(user);
 		
-		return "È¸¿ø°¡ÀÔ¿Ï·á";
+		return "íšŒì›ê°€ì…ì™„ë£Œ";
 	}
 }

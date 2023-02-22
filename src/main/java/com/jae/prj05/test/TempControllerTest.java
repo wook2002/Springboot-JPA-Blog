@@ -3,8 +3,8 @@ package com.jae.prj05.test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-// @RestController : return ±× ÀÚÃ¼ÀÇ Data 
-// @Controller : return°æ·Î¿¡ ÀÖ´Â File
+// @RestController : ì‚¬ìš©ì ìš”ì²­ -> ì‘ë‹µ(Dataë¡œ)
+// @Controller : ì‚¬ìš©ì ìš”ì²­ -> ì‘ë‹µ(HTML íŒŒì¼)
 @Controller
 public class TempControllerTest {
 	

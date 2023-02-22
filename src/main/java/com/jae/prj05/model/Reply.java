@@ -33,11 +33,11 @@ public class Reply {
 	@Column(nullable = false, length = 200)
 	private String content;
 	
-	@ManyToOne // ¿¬°ü°ü°è(n´ë1)(´äº¯ : ±Û)
+	@ManyToOne // ì—°ê´€ê´€ê³„(nëŒ€1)(ë‹µë³€ : ê¸€)
 	@JoinColumn(name = "boardId")
 	private Board board;
 	
-	@ManyToOne // (´äº¯: À¯Àú)
+	@ManyToOne // (ë‹µë³€: ìœ ì €)
 	@JoinColumn(name = "userId")
 	private User user;
 	

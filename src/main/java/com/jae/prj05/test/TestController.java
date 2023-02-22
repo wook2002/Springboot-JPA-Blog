@@ -3,7 +3,7 @@ package com.jae.prj05.test;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController // ¸Ş¸ğ¸®¿¡ new·Î ¿Ã¸®´Â°Å °°Àº°Í(½ºÇÁ¸µ ÄÁÅ×ÀÌ³Ê°¡ °ü¸®) -> IoC  
+@RestController // ë©”ëª¨ë¦¬ì— newë¡œ ì˜¬ë¦¬ëŠ”ê±° ê°™ì€ê²ƒ(ìŠ¤í”„ë§ ì»¨í…Œì´ë„ˆê°€ ê´€ë¦¬) -> IoC  
 public class TestController {
 	
 	@GetMapping("/test/hello")
@@ -11,15 +11,15 @@ public class TestController {
 		return "<h1>hello sprin</h1>";
 	}
 	
-// ½ºÇÁ¸µ IoC(Á¦¾îÀÇ¿ªÀü) - Á÷Á¢ new·Î ¸Ş¸ğ¸®¿¡ ¿Ã¸®Áö ¸¶
-//		=> '½Ì±ÛÅæ' -> ·¹ÆÛ·±½º º¯¼ö¸¦ ½ºÇÁ¸µÀÌ °ü¸®
+// ìŠ¤í”„ë§ IoC(ì œì–´ì˜ì—­ì „) - ì§ì ‘ newë¡œ ë©”ëª¨ë¦¬ì— ì˜¬ë¦¬ì§€ ë§ˆ
+//		=> 'ì‹±ê¸€í†¤' -> ë ˆí¼ëŸ°ìŠ¤ ë³€ìˆ˜ë¥¼ ìŠ¤í”„ë§ì´ ê´€ë¦¬
 
-//		ÈÄ¿¡ Á¤¸®Á» ÇÒ°Íµé...
-//		(Áö¿ªº¯¼ö¿¡¼­) => new´Â heap¿¡ ¿Ã¶ó°¨(º¯¼ö´Â ÁÖ¼Ò°ø°£ÀÇ ÁÖ¼Ò¸í)
-//		stackÀÇ ¸ğµç °´Ã¼´Â Áö¿ªº¯¼ö°¡ °ü¸®? 
-//		=> new·Î heap¿¡ °è¼Ó ¿Ã¸®´Â°Å ³Ê°¡ ÇÏÁö¸»°í
-//			springÀÌ ´ë½Å ÇÏ´Â ÇÏ°ÚÀ½(IoC)
-//	 	½ºÇÁ¸µ Scan ¼³¸íÇÏ±âÀ§ÇØ ¼³¸íÇÑ ÀÌ·±Àú·±°ÍµéÀÓ. 
+//		í›„ì— ì •ë¦¬ì¢€ í• ê²ƒë“¤...
+//		(ì§€ì—­ë³€ìˆ˜ì—ì„œ) => newëŠ” heapì— ì˜¬ë¼ê°(ë³€ìˆ˜ëŠ” ì£¼ì†Œê³µê°„ì˜ ì£¼ì†Œëª…)
+//		stackì˜ ëª¨ë“  ê°ì²´ëŠ” ì§€ì—­ë³€ìˆ˜ê°€ ê´€ë¦¬? 
+//		=> newë¡œ heapì— ê³„ì† ì˜¬ë¦¬ëŠ”ê±° ë„ˆê°€ í•˜ì§€ë§ê³ 
+//			springì´ ëŒ€ì‹  í•˜ëŠ” í•˜ê² ìŒ(IoC)
+//	 	ìŠ¤í”„ë§ Scan ì„¤ëª…í•˜ê¸°ìœ„í•´ ì„¤ëª…í•œ ì´ëŸ°ì €ëŸ°ê²ƒë“¤ì„. 
 //		https://www.youtube.com/watch?v=n33ao_cbhsU&list=PL93mKxaRDidECgjOBjPgI3Dyo8ka6Ilqm&index=6
 	
 	

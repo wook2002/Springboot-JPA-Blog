@@ -4,12 +4,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@RequiredArgsConstructor // final ºÙÀº ¾ÖµéÀÇ »ı¼ºÀÚ(final ¾ø´Â ¾ÖµéÀº ¾È¸¸µé¾îÁü)
+//@RequiredArgsConstructor // final ë¶™ì€ ì• ë“¤ì˜ ìƒì„±ì(final ì—†ëŠ” ì• ë“¤ì€ ì•ˆë§Œë“¤ì–´ì§)
 @Data  // @Getter + @Setter
 @NoArgsConstructor
 //@AllArgsConstructor => @Builder
 public class Member {
-//	¾îÂ÷ÇÇ DB¿¡¼­ °¡Á®¿À´Ï±î µ¥ÀÌÅÍº¯ÇÏÁö ¾Ê°Ô final(ºÒº¯¼º)
+//	ì–´ì°¨í”¼ DBì—ì„œ ê°€ì ¸ì˜¤ë‹ˆê¹Œ ë°ì´í„°ë³€í•˜ì§€ ì•Šê²Œ final(ë¶ˆë³€ì„±)
 //	private final int id;
 	private int id;
 	private String username; 
@@ -17,7 +17,7 @@ public class Member {
 	private String email;
 	
 //	@Builder 
-//	ÀåÁ¡ : ¼ø¼­ÇÊ¿ä¾øÀ½, ¸Å°³º¯¼ö ÀÖ´Â »ı¼ºÀÚµµ ÀÌ°Å ÇÏ³ª¸é ³¡
+//	ì¥ì  : ìˆœì„œí•„ìš”ì—†ìŒ, ë§¤ê°œë³€ìˆ˜ ìˆëŠ” ìƒì„±ìë„ ì´ê±° í•˜ë‚˜ë©´ ë
 	@Builder
 	public Member(int id, String username, String password, String email) {
 		this.id = id;

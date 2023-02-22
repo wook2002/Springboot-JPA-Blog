@@ -17,44 +17,44 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// ORM¶õ? Javaµîµî ±× Object -> Å×ÀÌºí·Î ¸ÅÇÎÇØÁÖ´Â ±â¼ú.
+// ORMë€? Javaë“±ë“± ê·¸ Object -> í…Œì´ë¸”ë¡œ ë§¤í•‘í•´ì£¼ëŠ” ê¸°ìˆ .
 // (Object Relational Mapping)
 
-//@DynamicInsert  //insertÇÒ¶§ nullÀÎ ÇÊµå Á¦¿Ü (±âº»°ª ÀÖÀ¸¸é ±âº»°ª »ç¿ë)
+//@DynamicInsert  //insertí• ë•Œ nullì¸ í•„ë“œ ì œì™¸ (ê¸°ë³¸ê°’ ìˆìœ¼ë©´ ê¸°ë³¸ê°’ ì‚¬ìš©)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder // ºô´õÆĞÅÏ
-@Entity //Å×ÀÌºíÈ­(User Å¬·¡½º°¡ Mysql¿¡ Å×ÀÌºíÀÌ »ı¼ºµÊ.)
+@Builder // ë¹Œë”íŒ¨í„´
+@Entity //í…Œì´ë¸”í™”(User í´ë˜ìŠ¤ê°€ Mysqlì— í…Œì´ë¸”ì´ ìƒì„±ë¨.)
 public class User {
 	
-	@Id //±âº»Å°(Primary key)(javax.persistence.Id;)
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE) // (½ÃÄö½º), TABLE(Å×ÀÌºí¿¡ ¹øÈ£ µîµî), AUTO(ÀÚµ¿), µîµî
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // (ºñ¿öµµ ÀÚµ¿ÀÔ·Â)³Ñ¹ö¸µÀü·«(DB³Ñ¹ö¸µ Àü·«À» µû¶ó°¨(ÇÁ·ÎÁ§Æ®¿¡ ¿¬°áµÈ)( ¿À¶óÅ¬(½ÃÄö½º), mysql(auto_increment) )
+	@Id //ê¸°ë³¸í‚¤(Primary key)(javax.persistence.Id;)
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE) // (ì‹œí€€ìŠ¤), TABLE(í…Œì´ë¸”ì— ë²ˆí˜¸ ë“±ë“±), AUTO(ìë™), ë“±ë“±
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // (ë¹„ì›Œë„ ìë™ì…ë ¥)ë„˜ë²„ë§ì „ëµ(DBë„˜ë²„ë§ ì „ëµì„ ë”°ë¼ê°(í”„ë¡œì íŠ¸ì— ì—°ê²°ëœ)( ì˜¤ë¼í´(ì‹œí€€ìŠ¤), mysql(auto_increment) )
 	private int id; // 
 	
-	@Column(nullable = false, length = 30, unique = true) //( nullºÒ°¡, 30ÀÚ°¡ ÃÖ´ë )  
-	private String username; // ¾ÆÀÌµğ
+	@Column(nullable = false, length = 30, unique = true) //( nullë¶ˆê°€, 30ìê°€ ìµœëŒ€ )  
+	private String username; // ì•„ì´ë””
 	
-	@Column(nullable = false, length = 100) // ÇØ½Ã·Î º¯°æÇÒ°Å¶ó¼­ ³Ë³ËÇÏ°Ô(¾ÏÈ£È­)
+	@Column(nullable = false, length = 100) // í•´ì‹œë¡œ ë³€ê²½í• ê±°ë¼ì„œ ë„‰ë„‰í•˜ê²Œ(ì•”í˜¸í™”)
 	private String password;
 	
 	@Column(nullable = false, length = 50)
 	private String email;
 	
-//	(m1) Role (@DynamicInsertÀ» ½á¼­ default°ª)
-//	@ColumnDefault("user") (x) =>  "  ' ¹®ÀÚ '  "
+//	(m1) Role (@DynamicInsertì„ ì¨ì„œ defaultê°’)
+//	@ColumnDefault("user") (x) =>  "  ' ë¬¸ì '  "
 //	@ColumnDefault("'user'")
-//	private String role; //(ADMIN, USER, ...) Stirng¸»°í EnumÀ» ¾²´Â°Ô ÁÁ´Ù(µµ¸ŞÀÎ¼³Á¤°¡´É(¹üÀ§°¡´É: adminnn2 ÀÌ·±°Å ¾ÈÇÏ°Ô))
+//	private String role; //(ADMIN, USER, ...) Stirngë§ê³  Enumì„ ì“°ëŠ”ê²Œ ì¢‹ë‹¤(ë„ë©”ì¸ì„¤ì •ê°€ëŠ¥(ë²”ìœ„ê°€ëŠ¥: adminnn2 ì´ëŸ°ê±° ì•ˆí•˜ê²Œ))
 
-//	(m2) Role (EnumÀ» ¾²´Â°Ô ÁÁ´Ù -> ¿©±â¿¡ ÀÖ´Â Å¸ÀÔ¸¸ °¡´ÉÇØÁü)
-//	DB´Â RoleTypeÀÌ¶ó´Â°Ô ¾øÀ½ => ÀÌ EnumÅ¸ÀÔÀº StringÀÌ¶ó°í ¾Ë·ÁÁà¾ßµÊ
+//	(m2) Role (Enumì„ ì“°ëŠ”ê²Œ ì¢‹ë‹¤ -> ì—¬ê¸°ì— ìˆëŠ” íƒ€ì…ë§Œ ê°€ëŠ¥í•´ì§)
+//	DBëŠ” RoleTypeì´ë¼ëŠ”ê²Œ ì—†ìŒ => ì´ Enumíƒ€ì…ì€ Stringì´ë¼ê³  ì•Œë ¤ì¤˜ì•¼ë¨
 	@Enumerated(EnumType.STRING)
 	private RoleType role;
 //	import javax.persistence.EnumType;
 //	import javax.persistence.Enumerated;
 	
 	
-	@CreationTimestamp // (ºñ¿öµµ ÀÚµ¿ÀÔ·Â)½Ã°£ÀÚµ¿ÀÔ·Â <= DB²¨ ¾È¾²°í(oracle(sysdate), mysql(now)) 
+	@CreationTimestamp // (ë¹„ì›Œë„ ìë™ì…ë ¥)ì‹œê°„ìë™ì…ë ¥ <= DBêº¼ ì•ˆì“°ê³ (oracle(sysdate), mysql(now)) 
 	private Timestamp createDate; //java.sql
 }

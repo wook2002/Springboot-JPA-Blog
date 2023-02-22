@@ -25,8 +25,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder // ºô´õÆĞÅÏ
-@Entity // ÀÌ°Ç ¹Ø¿¡ ÀÖ´Â°Ô ÁÁÀ½
+@Builder // ë¹Œë”íŒ¨í„´
+@Entity // ì´ê±´ ë°‘ì— ìˆëŠ”ê²Œ ì¢‹ìŒ
 public class Board {
 
 	@Id
@@ -36,35 +36,35 @@ public class Board {
 	@Column(nullable = false, length = 100)
 	private String title;
 	
-	@Lob // ´ë¿ë·®µ¥ÀÌÅÍ
-	private String content; // (Åø)¼¶¸Ó³ëÆ® ¶óÀÌºê·¯¸® <html>ÅÂ±×°¡ ¼¯¿©¼­ µğÀÚÀÎµÊ(¿ë·®Å­)
+	@Lob // ëŒ€ìš©ëŸ‰ë°ì´í„°
+	private String content; // (íˆ´)ì„¬ë¨¸ë…¸íŠ¸ ë¼ì´ë¸ŒëŸ¬ë¦¬ <html>íƒœê·¸ê°€ ì„ì—¬ì„œ ë””ìì¸ë¨(ìš©ëŸ‰í¼)
 	
-	@ColumnDefault("0") //¼ıÀÚ vs @ColumnDefault("'user'") ¹®ÀÚ
-	private int count; // Á¶È¸¼ö
+	@ColumnDefault("0") //ìˆ«ì vs @ColumnDefault("'user'") ë¬¸ì
+	private int count; // ì¡°íšŒìˆ˜
 	
-//	@ManyToOne(fetch = FetchType.EAGER) // ±âº»
-// @ManyToOne => EAGER¶ó´Â ±âº»Àü·« (Board¸¦ selectÇÏ¸é, ¹«Á¶°Ç µé°í¿Í)
-//	@OneToMany = > LAZY¶ó´Â ±âº»Àü·« (Board¸¦ selectÇÏ¸é, ÇÊ¿äÇÒ ¶§¸¸ µé°í¿À±â)
+//	@ManyToOne(fetch = FetchType.EAGER) // ê¸°ë³¸
+// @ManyToOne => EAGERë¼ëŠ” ê¸°ë³¸ì „ëµ (Boardë¥¼ selectí•˜ë©´, ë¬´ì¡°ê±´ ë“¤ê³ ì™€)
+//	@OneToMany = > LAZYë¼ëŠ” ê¸°ë³¸ì „ëµ (Boardë¥¼ selectí•˜ë©´, í•„ìš”í•  ë•Œë§Œ ë“¤ê³ ì˜¤ê¸°)
 	
 	@ManyToOne
-	@JoinColumn(name="userId") // userId -> BoardÀÇ DBÄÃ·³¸í(FK)
-	private User user; // (ormÀº)°´Ã¼¸¦ »ç¿ëÇÏ¸é ÀÚµ¿ FK ¸¸µé¾îÁü 
-// DB´Â ¿ÀºêÁ§Æ®¸¦ ÀúÀåÇÒ ¼ö ¾ø´Ù. FK, ÀÚ¹Ù´Â ¿ÀºêÁ§Æ® ÀúÀå°¡´É. => Ãæµ¹
-//	private int userId; // foreignKey => orm¤¤¤¤ ¿ÀºêÁ§Æ®·Î ÇØ¾ßµÊ)
-//	FK : java´Â °´Ã¼, DB´Â int 
+	@JoinColumn(name="userId") // userId -> Boardì˜ DBì»¬ëŸ¼ëª…(FK)
+	private User user; // (ormì€)ê°ì²´ë¥¼ ì‚¬ìš©í•˜ë©´ ìë™ FK ë§Œë“¤ì–´ì§ 
+// DBëŠ” ì˜¤ë¸Œì íŠ¸ë¥¼ ì €ì¥í•  ìˆ˜ ì—†ë‹¤. FK, ìë°”ëŠ” ì˜¤ë¸Œì íŠ¸ ì €ì¥ê°€ëŠ¥. => ì¶©ëŒ
+//	private int userId; // foreignKey => ormã„´ã„´ ì˜¤ë¸Œì íŠ¸ë¡œ í•´ì•¼ë¨)
+//	FK : javaëŠ” ê°ì²´, DBëŠ” int 
 	
-// mappedBy : reply´Â ¿¬°ü°ü°èÁÖÀÎÀÌ ¾Æ´Ï´Ù(³­ FK°¡ ¾Æ´Ï´Ù) 
-//						=> DB¿¡ ÄÃ·³À» ¸¸µéÁö¸¶(BoardÂÊÀÌ FKÀÓ)
+// mappedBy : replyëŠ” ì—°ê´€ê´€ê³„ì£¼ì¸ì´ ì•„ë‹ˆë‹¤(ë‚œ FKê°€ ì•„ë‹ˆë‹¤) 
+//						=> DBì— ì»¬ëŸ¼ì„ ë§Œë“¤ì§€ë§ˆ(Boardìª½ì´ FKì„)
 	
-//	@JoinColumn(name="replyId") // FK ÇÊ¿ä¾øÀ½(¿øÀÚ¼º±úÁü)
-//	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY) // (°Ô½Ã±Û1:´äº¯n)
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // ÇÊ¼ö·Î °¡Á®¿Ã²¨¶ó¼­ Àü·« ¹Ù²Ş
+//	@JoinColumn(name="replyId") // FK í•„ìš”ì—†ìŒ(ì›ìì„±ê¹¨ì§)
+//	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY) // (ê²Œì‹œê¸€1:ë‹µë³€n)
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // í•„ìˆ˜ë¡œ ê°€ì ¸ì˜¬êº¼ë¼ì„œ ì „ëµ ë°”ê¿ˆ
 	private List<Reply> reply;
-	// ¿¬°ü°ü°è ÁÖÀÎ = FK¸¦ °¡Áø °´Ã¼(¿ÀºêÁ§Æ®, object)
-	// ORM Æ¯Â¡ 1. º¸Åë User + Reply + Board ´Ù joinÇÏ°í selectÇÏ°ïÇÔ
-	//	¢¡ ORMÀº Board¸¸ selectÇÏ¸éµÊ (JPA°¡ ÇØÁÜ)
-	// User 1°³ 
-	// Reply n°³ => ÄÃ·º¼Ç(java.util.List)
+	// ì—°ê´€ê´€ê³„ ì£¼ì¸ = FKë¥¼ ê°€ì§„ ê°ì²´(ì˜¤ë¸Œì íŠ¸, object)
+	// ORM íŠ¹ì§• 1. ë³´í†µ User + Reply + Board ë‹¤ joiní•˜ê³  selectí•˜ê³¤í•¨
+	//	â‡’ ORMì€ Boardë§Œ selectí•˜ë©´ë¨ (JPAê°€ í•´ì¤Œ)
+	// User 1ê°œ 
+	// Reply nê°œ => ì»¬ë ‰ì…˜(java.util.List)
 	
 	@CreationTimestamp
 	private Timestamp createDate; //java.sql

@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
 		return "<h1>" + e.getMessage() + "</h1>";
 	}
 	
-//	@ExceptionHandler(value=IllegalArgumentException.class) // ±Ã±ÝÇØ¼­ Ãß°¡ÇØº½
+//	@ExceptionHandler(value=IllegalArgumentException.class) // í…ŒìŠ¤íŠ¸
 //	public String handleArgumentException(IllegalArgumentException e) {
 //		return "<h1>" + e.getMessage() + "</h1><br><h2>IllegalArgumentException</h2>";
 //	}

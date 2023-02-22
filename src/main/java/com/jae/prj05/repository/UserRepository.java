@@ -6,33 +6,33 @@ import org.springframework.stereotype.Repository;
 import com.jae.prj05.model.User;
 
 
-// ½ºÇÁ¸µ IoC¿¡¼­ °´Ã¼¸¦ °¡Áö°í ÀÖ³ª¿ä? (=ºóÀ¸·Î µî·ÏÀÌ µÇ³ª¿ä?) => ±×·¡¾ß DIµÊ
-// DAO (jsp·Î Ä¡¸é)(Data Access Object)
-// ÀÚµ¿À¸·Î beanµî·Ï
-@Repository  //  ÀÚµ¿À¸·Î beanµî·ÏµÊ, »ı·«°¡´É
+// ìŠ¤í”„ë§ IoCì—ì„œ ê°ì²´ë¥¼ ê°€ì§€ê³  ìˆë‚˜ìš”? (=ë¹ˆìœ¼ë¡œ ë“±ë¡ì´ ë˜ë‚˜ìš”?) => ê·¸ë˜ì•¼ DIë¨
+// DAO (jspë¡œ ì¹˜ë©´)(Data Access Object)
+// ìë™ìœ¼ë¡œ beanë“±ë¡
+@Repository  //  ìë™ìœ¼ë¡œ beanë“±ë¡ë¨, ìƒëµê°€ëŠ¥
 public interface UserRepository extends JpaRepository<User, Integer>{
 //public interface UserRepository extends JpaRepository<T, ID>{
 
 	
-// -- extends JpaRepository (F3 or F4 µé¾î°¡º¸¸é Àú°Å ÀÖÀ½)--
-//	 => µé¾î°¡º¸¸é ÀÖ´Â °Íµé ´Ù ¾µ ¼ö ÀÖÀ½.
+// -- extends JpaRepository (F3 or F4 ë“¤ì–´ê°€ë³´ë©´ ì €ê±° ìˆìŒ)--
+//	 => ë“¤ì–´ê°€ë³´ë©´ ìˆëŠ” ê²ƒë“¤ ë‹¤ ì“¸ ìˆ˜ ìˆìŒ.
 	
 //	public interface JpaRepository<T, ID> extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T> {
 //	...
 //	@Override
-//	List<T> findAll(); // UserTable ¸ğµÎ ¸®ÅÏ(¸ğµçÅ¸ÀÔ)
+//	List<T> findAll(); // UserTable ëª¨ë‘ ë¦¬í„´(ëª¨ë“ íƒ€ì…)
 //	(~~Returns all instances of the type.~~)
-// ¡é (¶Ç µé¾î°¡º¸¸é)
+// â†“ (ë˜ ë“¤ì–´ê°€ë³´ë©´)
 
 //	public interface PagingAndSortingRepository<T, ID> extends CrudRepository<T, ID> {
-//	Iterable<T> findAll(Sort sort);  //µüºÁµµ Á¤·Ä 
-//	Page<T> findAll(Pageable pageable); //µüºÁµµ ÆäÀÌÂ¡
-// ¡é (¶Ç µé¾î°¡º¸¸é)
+//	Iterable<T> findAll(Sort sort);  //ë”±ë´ë„ ì •ë ¬ 
+//	Page<T> findAll(Pageable pageable); //ë”±ë´ë„ í˜ì´ì§•
+// â†“ (ë˜ ë“¤ì–´ê°€ë³´ë©´)
 	
 //	public interface CrudRepository<T, ID> extends Repository<T, ID> {
 //	<S extends T> S save(S entity);  
-// (Saves a given entity.~¸Ó¶ó¸Ó¶ó~) => // save() : insert, update ¾µ ¼ö ÀÖÀ½
-//	µîµî 
+// (Saves a given entity.~ë¨¸ë¼ë¨¸ë¼~) => // save() : insert, update ì“¸ ìˆ˜ ìˆìŒ
+//	ë“±ë“± 
 
 
 

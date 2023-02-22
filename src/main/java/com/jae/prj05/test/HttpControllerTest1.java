@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-// »ç¿ëÀÚ ¿äÃ» -> ÀÀ´ä(HTML ÆÄÀÏ)
+// ì‚¬ìš©ì ìš”ì²­ -> ì‘ë‹µ(HTML íŒŒì¼)
 // @Controller
 
 import lombok.Builder;
 
 
-// »ç¿ëÀÚ ¿äÃ» -> ÀÀ´ä(Data·Î)
+// ì‚¬ìš©ì ìš”ì²­ -> ì‘ë‹µ(Dataë¡œ)
 // @RestController
 
 @RestController
@@ -21,44 +21,44 @@ public class HttpControllerTest1 {
 	
 	private static final String TAG = "HttpControllerTest1 : ";
 	
-//	ÀÎÅÍ³İ ºê¶ó¿ìÀú ¿äÃ»Àº ¹«Á¶°Ç get ¿äÃ»
+//	ì¸í„°ë„· ë¸Œë¼ìš°ì € ìš”ì²­ì€ ë¬´ì¡°ê±´ get ìš”ì²­
 //(select) 	http://localhost:8077/blog/http/get
 	@GetMapping("/http/get")
 	public String getTest(
-//			get °ªº¸³»´Â°Å => (only) Äõ¸®½ºÆ®¸µ
+//			get ê°’ë³´ë‚´ëŠ”ê±° => (only) ì¿¼ë¦¬ìŠ¤íŠ¸ë§
 //			m1)
 //			@RequestParam int id
 //			, @RequestParam String username 
 //			m2)
 			Member m
-			// (¿Â°Å ÀÚµ¿À¸·Î Member¿¡ µé¾î°¨)
-			// (½ºÇÁ¸µºÎÆ®ÀÇ MessageConverter°¡ ÇØÁÜ)
+			// (ì˜¨ê±° ìë™ìœ¼ë¡œ Memberì— ë“¤ì–´ê°)
+			// (ìŠ¤í”„ë§ë¶€íŠ¸ì˜ MessageConverterê°€ í•´ì¤Œ)
 			) {
 		m.setId(200);
 		System.out.println(TAG + "getter : " + m.getId());
 		
-//		@BuilderÅ×½ºÆ®
+//		@Builderí…ŒìŠ¤íŠ¸
 //		Member m = new Member(id, username, password, email)
 		Member mTest = Member.builder()
 											.username("ssar")
 											.password("123")
 											.build();
-		System.out.println("@BuilderÅ×½ºÆ® : " + mTest);
-//		@AllArgsConstructor´Â ¸ğµç °ª µé¾î°£ »ı¼ºÀÚÀÓ.
-//		ºÎºĞÀûÀ¸·Î ÇÊ¿äÇÒ ¶§¸¶´Ù »ı¼ºÀÚ¸¦ »õ·Î ¸¸µé¾ú´Âµ¥ 
-//		@builder »ç¿ëÇÏ¸é ¶Ç ¸¸µé ÇÊ¿ä ¾øÀ½.
-//		=> ÅäÅ«ÇÒ ¶§ ¾ÏÈ£¹æ¹ıµéÀ» ÀÌ·± ½ÄÀ¸·Î ³Ö¾úÀ½
+		System.out.println("@Builderí…ŒìŠ¤íŠ¸ : " + mTest);
+//		@AllArgsConstructorëŠ” ëª¨ë“  ê°’ ë“¤ì–´ê°„ ìƒì„±ìì„.
+//		ë¶€ë¶„ì ìœ¼ë¡œ í•„ìš”í•  ë•Œë§ˆë‹¤ ìƒì„±ìë¥¼ ìƒˆë¡œ ë§Œë“¤ì—ˆëŠ”ë° 
+//		@builder ì‚¬ìš©í•˜ë©´ ë˜ ë§Œë“¤ í•„ìš” ì—†ìŒ.
+//		=> í† í°í•  ë•Œ ì•”í˜¸ë°©ë²•ë“¤ì„ ì´ëŸ° ì‹ìœ¼ë¡œ ë„£ì—ˆìŒ
 		
 //		http://localhost:8077/http/get?id=1&username=ssar&password=1234&email=ssar@nate.com
-		return "get ¿äÃ»" + mTest.getId() + ", "+ mTest.getUsername() + mTest.getPassword() + ", " + mTest.getEmail();
+		return "get ìš”ì²­" + mTest.getId() + ", "+ mTest.getUsername() + mTest.getPassword() + ", " + mTest.getEmail();
 //		(200) response : Content-Type: text/html;charset=UTF-8 
 	}
 	
 //(insert)	http://localhost:8077/blog/http/post
 	@PostMapping("/http/post")
 	public String postTest(
-//			1) Äõ¸®½ºÆ®¸µ or
-//			2) body (x-www-form-urlencoded) => (°Á <form> ÅÂ±×)
+//			1) ì¿¼ë¦¬ìŠ¤íŠ¸ë§ or
+//			2) body (x-www-form-urlencoded) => (ê± <form> íƒœê·¸)
 //			Member m
 			
 //			3) raw-> text/plain 
@@ -67,25 +67,25 @@ public class HttpControllerTest1 {
 //			4) raw-> application/json
 //			 @RequestBody String text 
 			@RequestBody Member m 
-			// ÀÌ·¯¸é ÀÚµ¿À¸·Î ÆÄ½ÌÇØ¼­ ¿ÀºêÁ§Æ®¿¡ ³Ö¾îÁÜ
-			// (¿Â°Å ÀÚµ¿À¸·Î Member¿¡ µé¾î°¨)
-			// (½ºÇÁ¸µºÎÆ®ÀÇ MessageConverter°¡ ÇØÁÜ)
+			// ì´ëŸ¬ë©´ ìë™ìœ¼ë¡œ íŒŒì‹±í•´ì„œ ì˜¤ë¸Œì íŠ¸ì— ë„£ì–´ì¤Œ
+			// (ì˜¨ê±° ìë™ìœ¼ë¡œ Memberì— ë“¤ì–´ê°)
+			// (ìŠ¤í”„ë§ë¶€íŠ¸ì˜ MessageConverterê°€ í•´ì¤Œ)
 			
 			) {
-		return "post ¿äÃ»" + m.getId() + ", "+ m.getUsername() + m.getPassword() + ", " + m.getEmail();
-//		return "post ¿äÃ»" + text;
+		return "post ìš”ì²­" + m.getId() + ", "+ m.getUsername() + m.getPassword() + ", " + m.getEmail();
+//		return "post ìš”ì²­" + text;
 //		(405) Method Not Allowed
 	}
 	
 //(update)	http://localhost:8077/blog/http/put 
 	@PutMapping("/http/put")
 	public String putTest(@RequestBody Member  m) {
-		return "put ¿äÃ»" + m ;
+		return "put ìš”ì²­" + m ;
 	}
 	
 //(delete)	http://localhost:8077/blog/http/delete
 	@DeleteMapping("/http/delete")
 	public String deleteTest() {
-		return "delete ¿äÃ»";
+		return "delete ìš”ì²­";
 	}
 }
