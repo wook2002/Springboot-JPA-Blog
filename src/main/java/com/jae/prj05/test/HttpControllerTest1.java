@@ -43,6 +43,7 @@ public class HttpControllerTest1 {
 											.username("ssar")
 											.password("123")
 											.build();
+		
 		System.out.println("@Builder테스트 : " + mTest);
 //		@AllArgsConstructor는 모든 값 들어간 생성자임.
 //		부분적으로 필요할 때마다 생성자를 새로 만들었는데 

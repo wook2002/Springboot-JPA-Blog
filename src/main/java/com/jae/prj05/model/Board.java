@@ -37,7 +37,7 @@ public class Board {
 	private String title;
 	
 	@Lob // 대용량데이터
-	private String content; // (툴)섬머노트 라이브러리 <html>태그가 섞여서 디자인됨(용량큼)
+	private String content; // (툴)섬머노트 라이브러리 <html>태그가 섞여서 디자인될거(용량큼)
 	
 	@ColumnDefault("0") //숫자 vs @ColumnDefault("'user'") 문자
 	private int count; // 조회수
