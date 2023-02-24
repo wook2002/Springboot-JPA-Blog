@@ -1,8 +1,9 @@
 #server.port=8077
+# context-path: /blog
 server:
   port: 8077
   servlet:
-    context-path: /blog  #/-> /blog
+    context-path: /  
     encoding:
       charset: UTF-8
       enabled: true
@@ -23,7 +24,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update #(create: 기존거 있으면 덮어씌움)(update: 기존꺼 있으면 변경) (none:)
+      ddl-auto: create #(create: 기존거 있으면 덮어씌움)(update: 기존꺼 있으면 변경) (none:)
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false  #jpa가 사용하는 넘버링전략 사용안함 => (@GeneratedValue(~.IDENTITY) ->연결된DB따라갈거임)

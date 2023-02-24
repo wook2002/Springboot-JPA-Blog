@@ -24,17 +24,17 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'javax.servlet:jstl:1.2'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'javax.servlet:jstl:1.2' 
+	implementation 'org.springframework.security:spring-security-taglibs' // jsp->securityTag
+	//implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	//compile "org.springframework.boot:spring-boot-starter-security"
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	// .jar는 jsp 안됨(springboot) => 의존성 설정?
-	// 그리고 static에 jsp 동작안함(브라우저가 인식할 수 있는것만 동작(~정적파일))(jsp는 동적파일임)
-	// (jsp 못찾거나 그냥 다운받아짐)
-	//compile('org.apache.tomcat.embed:tomcat-embed-jasper')
-	//compile('javax.servlet:jstl:1.2')
+
 	
 }
 

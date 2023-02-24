@@ -27,6 +27,6 @@
 </div>
 
 <!-- / 있는거랑 없는거 구분 : context관련, 상대,절대 -->
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>
