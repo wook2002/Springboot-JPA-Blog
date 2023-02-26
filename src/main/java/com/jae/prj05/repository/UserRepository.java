@@ -1,5 +1,8 @@
 package com.jae.prj05.repository;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,8 +14,9 @@ import com.jae.prj05.model.User;
 // 자동으로 bean등록
 @Repository  //  자동으로 bean등록됨, 생략가능
 public interface UserRepository extends JpaRepository<User, Integer>{
-
 	
+	// SELECT * FROM user WHERE username = ?;
+	Optional<User> findByUsername(String username);
 	
 }
 // -- extends JpaRepository (F3 or F4 들어가보면 저거 있음)--

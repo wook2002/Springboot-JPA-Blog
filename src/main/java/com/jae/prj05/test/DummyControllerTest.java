@@ -66,7 +66,7 @@ public class DummyControllerTest {
 		//(m1)
 //		  Page<User> users = 	userRepository.findAll(pageable); // Page<T> findAll(Pageable pageable);
 		 // content[], pageable{}, last 등등 다 나옴 
-		 // => return Page<User> // List로 던지는게 좋을듯
+		 	// => return Page<User> // List로 던지는게 좋음?
 		 
 		//(m2)
 //	     List<User> users = 	userRepository.findAll(pageable).getContent();
@@ -164,6 +164,11 @@ public class DummyControllerTest {
 //			public User get() {
 //				return new User();  //빈객체를 return(빈객체를 user에 넣어줌)
 //			}
+//		});
+		
+		// 람다
+//		User user = userRepository.findById(id).orElseGet( ()->{
+//			return new User(); 
 //		});
 		
 		// (m3) 가장 많이 씀 (잘못된 인수가 들어오면 throws)

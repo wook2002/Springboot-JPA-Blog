@@ -18,7 +18,6 @@ public class SetNamingTest {
 		
 		String result = firstKey + upperkey + remainKey;
 		System.out.println("result : "  + result);
-		
-		
 	}
+
 }

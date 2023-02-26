@@ -39,7 +39,7 @@ public class Board {
 	@Lob // 대용량데이터
 	private String content; // (툴)섬머노트 라이브러리 <html>태그가 섞여서 디자인될거(용량큼)
 	
-	@ColumnDefault("0") //숫자 vs @ColumnDefault("'user'") 문자
+//	@ColumnDefault("0") //숫자 vs @ColumnDefault("'user'") 문자
 	private int count; // 조회수
 	
 //	@ManyToOne(fetch = FetchType.EAGER) // 기본
@@ -65,6 +65,7 @@ public class Board {
 	//	⇒ ORM은 Board만 select하면됨 (JPA가 해줌)
 	// User 1개 
 	// Reply n개 => 컬렉션(java.util.List)
+	// , 즉 이건 select위한 변수임.
 	
 	@CreationTimestamp
 	private Timestamp createDate; //java.sql
