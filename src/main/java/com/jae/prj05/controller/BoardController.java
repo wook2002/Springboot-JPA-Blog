@@ -1,32 +1,34 @@
 package com.jae.prj05.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import com.jae.prj05.config.auth.PrincipalDetail;
+import com.jae.prj05.service.BoardService;
 
 @Controller
 public class BoardController {
 	
-	// 이건 안됨(겪어봄 기억안남)
-//	@Autowired
-//	private PrincipalDetail principal;
-	
-//	@GetMapping({"/",""})
-//	public String index(
-//			// 컨트롤러에서 세션을 어떻게 찾는지
-//			// org.springframework.security.core.annotation.AuthenticationPrincipal;
-//			@AuthenticationPrincipal PrincipalDetail principal
-//			) {
-//		System.out.println("로그인 아이디 : " + principal.getUsername());
-//		return "index";
-//	}
+	@Autowired
+	private BoardService boardService;
 	
 	@GetMapping({"/",""})
-	public String index() {
+	public String index(
+						Model model
+					, @PageableDefault(size=2, sort="id", direction = Sort.Direction.DESC) Pageable pageablel
+				){
+		model.addAttribute("boards", boardService.글목록(pageablel));
 		return "index";
+	}
+	@GetMapping("/board/{id}")
+	public String findById(@PathVariable int id, Model model) {
+		model.addAttribute("board", boardService.글상세보기(id));
+		return "board/detail";
 	}
 	
 	@GetMapping("/board/saveForm")

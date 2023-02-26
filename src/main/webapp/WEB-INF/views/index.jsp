@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <!-- 상대경로 -->
 <%@ include file="layout/header.jsp"%>
@@ -6,26 +7,39 @@
 <div class="container">
 
 	<!-- m-2 : margin -->
-	<div class="card m-2">
-		<div class="card-body">
-			<h4 class="card-title">제목 부분</h4>
-			<a href="#" class="btn btn-primary">상세 부분</a>
+	<c:forEach var="board" items="${boards.content}">
+		<div class="card m-2">
+			<div class="card-body">
+				<h4 class="card-title">${board.title}</h4>
+				<a href="/board/${board.id }" class="btn btn-primary">상세보기</a>
+			</div>
 		</div>
-	</div>
+	</c:forEach>
 
-	<div class="card m-2">
-		<div class="card-body">
-			<h4 class="card-title">제목 부분</h4>
-			<a href="#" class="btn btn-primary">상세 부분</a>
-		</div>
-	</div>
+	<!-- flex(d-flex => display:flex)의 정렬 justify-content-center -->
+	<ul class="pagination justify-content-center">
+		<c:choose>
+			<c:when test="${boards.first }">
+				<li class="page-item disabled"><a class="page-link"
+					href="?page=${boards.number -1}">Previous</a></li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item"><a class="page-link"
+					href="?page=${boards.number -1}">Previous</a></li>
+			</c:otherwise>
+		</c:choose>
 
-	<div class="card m-2">
-		<div class="card-body">
-			<h4 class="card-title">제목 부분</h4>
-			<a href="#" class="btn btn-primary">상세 부분</a>
-		</div>
-	</div>
+		<c:choose>
+			<c:when test="${boards.last }">
+				<li class="page-item disabled"><a class="page-link"
+					href="?page=${boards.number +1}">Next</a></li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item"><a class="page-link"
+					href="?page=${boards.number +1}">Next</a></li>
+			</c:otherwise>
+		</c:choose>
+
 
 </div>
 

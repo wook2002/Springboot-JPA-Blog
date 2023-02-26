@@ -59,7 +59,8 @@ public class DummyControllerTest {
 	//data.domain Pageable 
 	// 한페이지당 2건 (스프링부트+JPA -> 페이징)
 	@GetMapping("/dummy/user")
-	public List<User> pageList(  		//public interface Page<T> extends Slice<T> {
+//	public List<User> pageList(  		//public interface Page<T> extends Slice<T> {
+	public Page<User> pageList(
 			@PageableDefault(size=2, sort="id", direction = Sort.Direction.DESC)
 			Pageable pageable){
 		
@@ -82,7 +83,8 @@ public class DummyControllerTest {
 		// 등등 '분기'처리가능
 	    List<User> users = pagingUser.getContent();
 	    
-		return users;
+//		return users;
+		return pagingUser;
 	}
 	
 	

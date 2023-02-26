@@ -20,10 +20,10 @@ public class BoardApiController {
 	
 	@PostMapping("/api/board")
 	public ResponseDto<Integer> save(
-			@RequestBody Board board,
-			@AuthenticationPrincipal PrincipalDetail principal
+			@RequestBody Board board
+			, @AuthenticationPrincipal PrincipalDetail principal
 			// PrincipalDetail이 가지고 있는 데이터 가져옴
-			) {
+	){
 		System.out.println("==BoardApiController==");
 		boardService.글쓰기(board, principal.getUser()); 
 		//=> User user로 받음
