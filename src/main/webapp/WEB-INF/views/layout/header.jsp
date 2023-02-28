@@ -6,6 +6,7 @@
 <!-- property="principal"  // 위에 사이트에서 확인-->
 <!-- var="principal" => 변수임 -->
 
+<!-- session에 있는 로그인객체를 principal에(PrincipalDetail.java)-->
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal"  var="principal"/>
 

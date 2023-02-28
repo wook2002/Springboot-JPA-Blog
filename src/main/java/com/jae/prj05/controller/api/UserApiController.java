@@ -1,15 +1,22 @@
 package com.jae.prj05.controller.api;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jae.prj05.config.auth.PrincipalDetail;
 import com.jae.prj05.dto.ResponseDto;
-import com.jae.prj05.model.RoleType;
 import com.jae.prj05.model.User;
 import com.jae.prj05.service.UserService;
 
@@ -19,6 +26,9 @@ public class UserApiController {
 	@Autowired  // @Service로 등록되어 있어서 bean에 있으니 가능
 	private UserService userService;
 	
+//	@Autowired
+//	private AuthenticationManager authenticationManager;
+	
 	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) {
 		System.out.println("UserApiController : save 호출됨");
@@ -26,6 +36,33 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
+	@PutMapping("/user")  // @RequestBody : json받기 <-> key=value(x-www-form-urlencoded)
+	public ResponseDto<Integer> update(@RequestBody User user){
+		userService.회원수정(user);
+		// 트랜젝션이 종료돼서 더티체킹으로 DB값은 변경 됨.
+		// but session값은 변경되지 않음(수정페이지 들어가면 변경이 안돼 있음)
+		
+		// 세션값 강제 변경 (시큐리티는 좀 까다로움)
+		// org.springframework.security.core.Authentication
+		// principal, credentials
+		
+		// 강제로 세션값 변경
+		// (x)
+//		Authentication authentication =
+//				new UsernamePasswordAuthenticationToken
+//							(principal, null, principal.getAuthorities());
+//		SecurityContext securityContext = SecurityContextHolder.getContext();
+//		securityContext.setAuthentication(authentication);
+//		session.setAttribute("SPRING_SECURITY_CONTEXTA", securityContext);
+		
+//		Authentication authentication 
+//		= authenticationManager.authenticate(
+//				new UsernamePasswordAuthenticationToken
+//					(user.getUsername(), user.getPassword()));
+//		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
 	
 	
 	
